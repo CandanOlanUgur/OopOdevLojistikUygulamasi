@@ -6,14 +6,14 @@ import java.util.List;
 public class Sevkiyat {
 
     private String sevkiyatKodu;
-    private Firma gonderici;
-    private Firma alici;
+    private String gonderici;
+    private String alici;
     private List<Urun> tasinanUrunler;
     private Arac tasiyanArac;
-    private Date cikisTarihi;
-    private Date varisTarihi;
+    private String cikisTarihi;
+    private String varisTarihi;
 
-    public Sevkiyat(String sevkiyatKodu, Date varisTarihi, Date cikisTarihi, List<Urun> tasinanUrunler, Arac tasiyanArac, Firma alici, Firma gonderici) {
+    public Sevkiyat(String sevkiyatKodu, String varisTarihi, String cikisTarihi, List<Urun> tasinanUrunler, Arac tasiyanArac, String alici, String gonderici) {
         this.sevkiyatKodu = sevkiyatKodu;
         this.varisTarihi = varisTarihi;
         this.cikisTarihi = cikisTarihi;
@@ -31,19 +31,19 @@ public class Sevkiyat {
         this.sevkiyatKodu = sevkiyatKodu;
     }
 
-    public Date getVarisTarihi() {
+    public String getVarisTarihi() {
         return varisTarihi;
     }
 
-    public void setVarisTarihi(Date varisTarihi) {
+    public void setVarisTarihi(String varisTarihi) {
         this.varisTarihi = varisTarihi;
     }
 
-    public Date getCikisTarihi() {
+    public String getCikisTarihi() {
         return cikisTarihi;
     }
 
-    public void setCikisTarihi(Date cikisTarihi) {
+    public void setCikisTarihi(String cikisTarihi) {
         this.cikisTarihi = cikisTarihi;
     }
 
@@ -63,19 +63,19 @@ public class Sevkiyat {
         this.tasinanUrunler = tasinanUrunler;
     }
 
-    public Firma getAlici() {
+    public String getAlici() {
         return alici;
     }
 
-    public void setAlici(Firma alici) {
+    public void setAlici(String alici) {
         this.alici = alici;
     }
 
-    public Firma getGonderici() {
+    public String getGonderici() {
         return gonderici;
     }
 
-    public void setGonderici(Firma gonderici) {
+    public void setGonderici(String gonderici) {
         this.gonderici = gonderici;
     }
 }
