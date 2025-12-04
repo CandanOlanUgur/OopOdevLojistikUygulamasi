@@ -28,8 +28,8 @@ public class Test {
         List<Urun> urunList0 = new ArrayList<>();
         urunList0.add(urun0);
         urunList0.add(urun1);
-        Arac arac0 = new Arac("48GT543", "Ugur Can Olmez", "YUKLENİYOR", "Mugla/Milas");
-        Sevkiyat sevkiyat0 = new Sevkiyat("011", "10.12.2025", "4.12.2025",urunList0, arac0, "MILASA101", "ICIMGIDA");
+
+        Sevkiyat sevkiyat0 = new Sevkiyat("011", "10.12.2025", "4.12.2025",urunList0, "arac0", "MILASA101", "ICIMGIDA");
         DalSevkiyatManager dalSevkiyatManager = new DalSevkiyatManager();
         dalSevkiyatManager.sevkiyatEkle(sevkiyat0);
 

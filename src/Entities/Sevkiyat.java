@@ -9,11 +9,11 @@ public class Sevkiyat {
     private String gonderici;
     private String alici;
     private List<Urun> tasinanUrunler;
-    private Arac tasiyanArac;
+    private String tasiyanArac;
     private String cikisTarihi;
     private String varisTarihi;
 
-    public Sevkiyat(String sevkiyatKodu, String varisTarihi, String cikisTarihi, List<Urun> tasinanUrunler, Arac tasiyanArac, String alici, String gonderici) {
+    public Sevkiyat(String sevkiyatKodu, String varisTarihi, String cikisTarihi, List<Urun> tasinanUrunler, String tasiyanArac, String alici, String gonderici) {
         this.sevkiyatKodu = sevkiyatKodu;
         this.varisTarihi = varisTarihi;
         this.cikisTarihi = cikisTarihi;
@@ -47,11 +47,11 @@ public class Sevkiyat {
         this.cikisTarihi = cikisTarihi;
     }
 
-    public Arac getTasiyanArac() {
+    public String getTasiyanArac() {
         return tasiyanArac;
     }
 
-    public void setTasiyanArac(Arac tasiyanArac) {
+    public void setTasiyanArac(String tasiyanArac) {
         this.tasiyanArac = tasiyanArac;
     }
 
