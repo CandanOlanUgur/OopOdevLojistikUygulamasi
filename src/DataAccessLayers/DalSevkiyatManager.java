@@ -48,29 +48,36 @@ public class DalSevkiyatManager {
             return sevkiyatListesi;
         }
 
+        DalUrunManager urunManager = new DalUrunManager(); //urunlere ulaş
+        ArrayList<Urun> tumUrunler = urunManager.urunleriGetir();
+
         try {
             BufferedReader reader = new BufferedReader(new FileReader(dosya));
             String satir;
 
-            while ((satir = reader.readLine()) != null) { //satır boş değilse döngüye devam et
-                String[] veri = satir.split(","); // virgüle göre stringi parçala
+            while ((satir = reader.readLine()) != null) {
+                String[] veri = satir.split(",");
 
-                //[0]Kodu, [1]GonderenID, [2]AliciID, [3]UrunIDler(101-102-), [4]Plaka, [5]Cikis, [6]Varis
-
-                //eksik satır varmı yokmu diye dosya kontrolü
-                if(veri.length == 7) continue;
+                if (veri.length < 7) { continue; } // 7.ci değere kadar almaya devam et
 
                 String sevkiyatKodu = veri[0];
-                String gönderici = veri[1];
+                String gonderici = veri[1];
                 String alici = veri[2];
 
-                String hamUrunString = veri[3];   //101-102-103 urun id lerini string olarak alır
-                String[] urunIdDizisi = hamUrunString.split("-"); // her id yi tek bir array e atar
+                String hamUrunString = veri[3]; // örn "1003-1004"
+                String[] urunIdDizisi = hamUrunString.split(","); //urunler ayrıldı
 
-                ArrayList<String> urunIdlListesi = new ArrayList<>(); // urun listesi arayı oluştur ve urunIdizisine eşitle
-                for (String id: urunIdDizisi) {
-                    if (!id.isEmpty()) {
-                        urunIdlListesi.add(id);
+                ArrayList<Urun> tasinanUrunlerListesi = new ArrayList<>();
+
+                for (String arananId : urunIdDizisi) {
+                    if (!arananId.isEmpty()) {
+
+                        for (Urun u: tumUrunler) {
+                            if (u.getId().equals(arananId)) {
+                                tasinanUrunlerListesi.add(u);
+                                break; // sıradaki Id yi kontrol et
+                            }
+                        }
                     }
                 }
 
@@ -78,8 +85,12 @@ public class DalSevkiyatManager {
                 String cikisTarihi = veri[5];
                 String varisTarihi = veri[6];
 
-                Sevkiyat s = new Sevkiyat(sevkiyatKodu, varisTarihi, cikisTarihi, urunIdlListesi );
+                Sevkiyat s = new Sevkiyat(sevkiyatKodu, varisTarihi, cikisTarihi, tasinanUrunlerListesi, plaka, alici, gonderici);
+                sevkiyatListesi.add(s);
+
             }
+
+            reader.close();
 
 
         } catch (Exception e) {
@@ -89,6 +100,53 @@ public class DalSevkiyatManager {
 
         return sevkiyatListesi;
     }
+
+    public void sevkiyatSil(String silinecekKod) {
+
+        ArrayList<Sevkiyat> tumSevkiyatlar = sevkiyatlariGetir();
+
+        boolean silindi = tumSevkiyatlar.removeIf(s -> s.getSevkiyatKodu().equals(silinecekKod));
+
+        if (silindi) {
+            try {
+                File dosya = new File("src/Database/Sevkiyatlar.txt");
+                BufferedWriter writer = new BufferedWriter(new FileWriter(dosya, false));
+
+                for (Sevkiyat s: tumSevkiyatlar) {
+
+                    StringBuilder urunIdleri = new StringBuilder();
+                    if (s.getTasinanUrunler() != null) {
+                        for (Urun u: s.getTasinanUrunler()) {
+                            urunIdleri.append(u.getId()).append("-");
+                        }
+                    }
+
+                    String satir = s.getSevkiyatKodu() + "," +
+                                    s.getGonderici() + "," +
+                                    s.getAlici() + "," +
+                                    urunIdleri.toString() + "," +
+                                    s.getTasiyanArac() + "," +
+                                    s.getCikisTarihi() + "," +
+                                    s.getVarisTarihi();
+
+                    writer.write(satir);
+                    writer.newLine();
+                }
+
+                writer.close();
+                System.out.println("Sevkiyat silindi: " + silinecekKod);
+
+            } catch (IOException e) {
+                System.out.println("Dosya guncellenirken hata olustu: "+ e.getMessage());
+            }
+        }
+
+        else {
+            System.out.println("Silinecek sevkiyat bulunamadi: " +  silinecekKod);
+        }
+    }
+
+
 
 
 

@@ -23,16 +23,18 @@ public class Test {
             break;
         }
 
-        Urun urun0 = new Urun("1003", "IcımAycicekYag1L", "GIDA", 1, 0.2, 1);
-        Urun urun1 = new Urun("1004", "KeskinogluYumurta15Li", "GIDA", 10, 2, 50 );
-        List<Urun> urunList0 = new ArrayList<>();
-        urunList0.add(urun0);
-        urunList0.add(urun1);
+        /*
+        List<Urun> urunList = new ArrayList<>();
+        urunList.add(new Urun("011", "JumboTuvaletKagit20Li", "Temizlik", 0.5, 0.8, 100));
 
-        Sevkiyat sevkiyat0 = new Sevkiyat("011", "10.12.2025", "4.12.2025",urunList0, "arac0", "MILASA101", "ICIMGIDA");
+        Sevkiyat sevkiyat0 = new Sevkiyat("011", "11.12.2025", "5.12.2025",urunList, "48GHJ345", "A101MILAS", "PAPIATemizlikUrunleri");
         DalSevkiyatManager dalSevkiyatManager = new DalSevkiyatManager();
         dalSevkiyatManager.sevkiyatEkle(sevkiyat0);
 
+         */
+
+        DalSevkiyatManager Sevkmanager = new DalSevkiyatManager();
+        Sevkmanager.sevkiyatSil("011");
     }
 }
 

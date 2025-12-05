@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SevkiyatManager {
 
-    public void sevkiyatOlustur(Firma gonderici, Firma alici, List<Urun> tasinanUrunler, Arac tasiyanArac, Date ciksTarihi, Date varisTarihi) {
+    public void sevkiyatOlustur(Firma gonderici, Firma alici, List<Urun> tasinanUrunler, String tasiyanArac, String ciksTarihi, String varisTarihi) {
 
 
 

@@ -59,6 +59,7 @@ public class Urun {
     public int getStok() {
         return  stok;
     }
+
 }
 
 
